@@ -29,20 +29,33 @@ const onContainerClick = (e) => {
   if (e.target.classList.contains("gallery")) return;
     const source = e.target.dataset.source;
     
-  const instance = basicLightbox.create(`
-    <img src="${source}"width="800" height="600">`);
+    const instance = basicLightbox.create(`
+    <img src="${source}" width="800" height="600">`, {
+        onShow: () => {
+            window.addEventListener("keydown", closeByEscButton)
+        },
+        onClose: () => {
+            window.removeEventListener("keydown", closeByEscButton)
+        },
+    });
+   
+function closeByEscButton(e) {
+        if (e.code === 'Escape') {
+            instance.close();
+        };
+    };
+    instance.show();
 
-  instance.show();
+
 };
 
 gallery.addEventListener("click", onContainerClick);
 
 
-
-
 const galleryDiv = document.querySelector(".gallery");
 galleryDiv.append(...htmlGalleryItems);
-console.log(galleryItems);
+
+
 
 
 
