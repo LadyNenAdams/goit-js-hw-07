@@ -26,7 +26,7 @@ const htmlGalleryItems = galleryItems.map((picture, index) => {
 const onContainerClick = (e) => {
   e.preventDefault();
 
-  if (e.target.classList.contains("gallery")) return;
+ 
     const source = e.target.dataset.source;
     
     const instance = basicLightbox.create(`
